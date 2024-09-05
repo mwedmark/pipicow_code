@@ -146,7 +146,6 @@ namespace
         #if defined(SERIAL_PRINTING)
             Serial.println("Connecting to: " + String(SSID));
         #endif
-        Serial.println("Coming here.....");
         WiFi.begin(SSID, PASSWORD);
         while(WiFi.status() != WL_CONNECTED) 
         {
@@ -168,19 +167,28 @@ namespace
       SelectNode();
     }
 }
-MiningJob *job[1];
+
+//const int numberOfCores = 1;
+
+MiningJob *job[NUMBER_OF_CORES];
+bool hasBeenInitialized = false;
 
 void setup() 
 {
+ 
     #if defined(SERIAL_PRINTING)
         Serial.begin(SERIAL_BAUDRATE);
         Serial.println("\n\nDuino-Coin " + String(configuration->MINER_VER));
+        Serial.println("Setting up thread 1");
     #endif
     pinMode(LED_BUILTIN, OUTPUT);
 
     WALLET_ID = String(random(0, 2811)); // Needed for miner grouping in the wallet
-    job[0] = new MiningJob(0, configuration);
-  
+
+    for(int i=0;i<NUMBER_OF_CORES;i++)
+    {
+        job[i] = new MiningJob(i, configuration);
+    }
     //WiFi.mode(WIFI_STA); // Setup ESP in client mode
     
     delay(1000);
@@ -200,14 +208,30 @@ void system_events_func(void* parameter)
   }
 }
 
-void single_core_loop() 
+//void core_loop(int core) 
+static void __no_inline_not_in_flash_func(core_loop)(int core)
 {
-    job[0]->mine();
-    VerifyWifi();
+    if(!hasBeenInitialized && core==0) hasBeenInitialized = true;
+    while(true && hasBeenInitialized)
+    {
+      job[core]->mine();
+      VerifyWifi();
+    }
+    delay(10);
 }
 
 void loop() 
 {
-    single_core_loop();
-    delay(10);
+    core_loop(0);
+    WiFiClientSecure* client = new WiFiClientSecure();
+    uint8_t data_crypt[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    client->setFingerprint(data_crypt);
+    //setFingerprint(" ");
+}
+
+//uint8_t state = HIGH;
+
+void loop1() 
+{
+     core_loop(1);
 }

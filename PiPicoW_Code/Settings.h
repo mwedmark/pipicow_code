@@ -9,7 +9,7 @@ extern char *DUCO_USER = "";
 extern char *MINER_KEY = "";
 // Change the part in brackets if you want to set a custom miner name
 // Use Auto to autogenerate, None for no custom identifier
-extern char *RIG_IDENTIFIER = "PiPicoW";
+extern char *RIG_IDENTIFIER = "";
 // Change the part in brackets to your WiFi name
 extern const char SSID[] = "";
 // Change the part in brackets to your WiFi password
@@ -19,6 +19,8 @@ extern const char PASSWORD[] = "";
 // -------------------- Advanced options ------------------------ //
 // Uncomment if you want to host the dashboard page (available on ESPs IP address and mDNS)
 //#define WEB_DASHBOARD
+
+#define NUMBER_OF_CORES 2
 
 // Comment out the line below if you wish to disable LED blinking
 #define LED_BLINKING
