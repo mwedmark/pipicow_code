@@ -168,8 +168,6 @@ namespace
     }
 }
 
-//const int numberOfCores = 1;
-
 MiningJob *job[NUMBER_OF_CORES];
 bool hasBeenInitialized = false;
 
