@@ -206,8 +206,8 @@ void system_events_func(void* parameter)
   }
 }
 
-//void core_loop(int core) 
-static void __no_inline_not_in_flash_func(core_loop)(int core)
+void core_loop(int core) 
+//static void __no_inline_not_in_flash_func(core_loop)(int core)
 {
     if(!hasBeenInitialized && core==0) hasBeenInitialized = true;
     while(true && hasBeenInitialized)
