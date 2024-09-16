@@ -20,7 +20,7 @@ extern const char PASSWORD[] = "";
 // Uncomment if you want to host the dashboard page (available on ESPs IP address and mDNS)
 //#define WEB_DASHBOARD
 
-#define NUMBER_OF_CORES 2
+#define NUMBER_OF_CORES 1
 
 // Comment out the line below if you wish to disable LED blinking
 #define LED_BLINKING

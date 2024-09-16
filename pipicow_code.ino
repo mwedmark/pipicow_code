@@ -173,7 +173,7 @@ bool hasBeenInitialized = false;
 
 void setup() 
 {
- 
+    set_sys_clock_khz(70000,false); //70Mhz gives diff=512  => 0.8 shares/s
     #if defined(SERIAL_PRINTING)
         Serial.begin(SERIAL_BAUDRATE);
         Serial.println("\n\nDuino-Coin " + String(configuration->MINER_VER));
