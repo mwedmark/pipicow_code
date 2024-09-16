@@ -1,4 +1,6 @@
 This is a self-contained Duino-coin miner written to work with Raspberry Pi Pico W boards, thus it can mine entirely by itself.
+It build heavily on the original ESP miner code and still includes unused parts of this. 
+It currently does NOT support OTA and does not have a working WIFI manager Web page to setup new WIFI network. Reprogramming need to be done via USB-cable and updating WIFI details currently needs a chage to code.
 You need to provide details about your WIFI network, Duino-coin user, number of active cores and maybe a specific identifier (as default "PiPicoW" is used)
 So in the top of of file "Settings.h" you need to set:
 
