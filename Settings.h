@@ -9,7 +9,7 @@ extern char *DUCO_USER = "";
 extern char *MINER_KEY = "";
 // Change the part in brackets if you want to set a custom miner name
 // Use Auto to autogenerate, None for no custom identifier
-extern char *RIG_IDENTIFIER = "";
+extern char *RIG_IDENTIFIER = "PiPicoW";
 // Change the part in brackets to your WiFi name
 extern const char SSID[] = "";
 // Change the part in brackets to your WiFi password
